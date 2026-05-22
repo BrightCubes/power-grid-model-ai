@@ -70,8 +70,8 @@ def create_synthetic_load_update_data(
     update_loads["id"] = load_ids[np.newaxis, :]
     update_loads["status"] = 1
 
-    base_p = np.maximum(base_loads["p_specified"].astype(np.float64), 1.0)
-    base_q = base_loads["q_specified"].astype(np.float64)
+    base_p = base_loads["p_specified"]
+    base_q = base_loads["q_specified"]
     q_over_p = np.divide(
         base_q, base_p, out=np.zeros_like(base_q), where=np.abs(base_p) > 1e-9
     )
@@ -235,15 +235,6 @@ def main() -> None:
         "profile_seed": profile_seed,
         "create_10_3_kv_net": create_10_3_kv_net,
         "calculation_method": calculation_method.name,
-        "visualize": visualize_enabled,
-        "run_name": run_name,
-        "output_root": str(output_root),
-        "output_dir": str(run_dir),
-        "input_path": str(input_path),
-        "update_path": str(update_path),
-        "power_flow_output_path": str(output_path),
-        "generation_params_path": str(params_path),
-        "created_utc": datetime.now(timezone.utc).isoformat(),
     }
     params_path.write_text(json.dumps(params_payload, indent=2), encoding="utf-8")
 
