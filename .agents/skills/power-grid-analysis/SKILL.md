@@ -16,7 +16,7 @@ This skill is for operations across the full `power-grid-model` ecosystem. The r
 
 | Constraint Category | Rule Details |
 | --- | --- |
-| **Reference Documents** | Start with `.github/skills/power-grid-analysis/references/README.md`, then route to task guides in `references/tasks` and layer guides in `references/pgm`, `references/pgm-ds`, `references/pgm-io`. `.github/skills/power-grid-analysis/REFERENCES.md` is kept as a backward-compatible landing page. |
+| **Reference Documents** | Start with `references/README.md`, then route to task guides in `references/tasks` and layer guides in `references/pgm`, `references/pgm-ds`, `references/pgm-io`. `REFERENCES.md` is kept as a backward-compatible landing page. |
 | **Allowed Libraries** | You are strictly constrained to `power-grid-model` (PGM), `power-grid-model-ds` (PGM-DS), `power-grid-model-io` (PGM-IO), `numpy`, `pandas`, `matplotlib`, and `seaborn`. |
 | **Preference** | Prefer `numpy` over `pandas` where straightforward. |
 | **Graph & Visualization** | Strictly utilize any graph and network consistency logic from `power-grid-model-ds` (which exposes a `Grid` dataclass, graph algorithms, and grid visualizer tools). Do not use outside graph dependencies like networkx directly. |
