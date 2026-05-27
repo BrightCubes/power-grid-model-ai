@@ -72,31 +72,23 @@ def create_synthetic_load_update_data(
 
     base_p = base_loads["p_specified"]
     base_q = base_loads["q_specified"]
-    q_over_p = np.divide(
-        base_q, base_p, out=np.zeros_like(base_q), where=np.abs(base_p) > 1e-9
-    )
+    q_over_p = np.divide(base_q, base_p, out=np.zeros_like(base_q), where=np.abs(base_p) > 1e-9)
 
     step_index = np.arange(n_steps, dtype=np.float64)
     hours = (step_index * step_minutes / 60.0) % 24.0
     days = (step_index * step_minutes) / (24.0 * 60.0)
 
     daily_shape = (
-        0.75
-        + 0.20 * np.sin(2.0 * np.pi * (hours - 6.0) / 24.0)
-        + 0.10 * np.sin(4.0 * np.pi * (hours - 15.0) / 24.0)
+        0.75 + 0.20 * np.sin(2.0 * np.pi * (hours - 6.0) / 24.0) + 0.10 * np.sin(4.0 * np.pi * (hours - 15.0) / 24.0)
     )
     weekday_index = days.astype(np.int64) % 7
     weekend_factor = np.where(weekday_index >= 5, 0.92, 1.00)
     seasonal_factor = 0.96 + 0.07 * np.sin(2.0 * np.pi * days / 60.0)
-    global_multiplier = np.clip(
-        daily_shape * weekend_factor * seasonal_factor, 0.35, 1.40
-    )
+    global_multiplier = np.clip(daily_shape * weekend_factor * seasonal_factor, 0.35, 1.40)
 
     rng = np.random.default_rng(seed)
     load_scaler = np.clip(rng.normal(loc=1.0, scale=0.12, size=n_loads), 0.70, 1.35)
-    random_noise = np.clip(
-        rng.normal(loc=1.0, scale=0.03, size=(n_steps, n_loads)), 0.85, 1.15
-    )
+    random_noise = np.clip(rng.normal(loc=1.0, scale=0.03, size=(n_steps, n_loads)), 0.85, 1.15)
 
     multiplier = np.clip(
         global_multiplier[:, np.newaxis] * load_scaler[np.newaxis, :] * random_noise,
@@ -150,9 +142,7 @@ def maybe_visualize_grid(
     try:
         from power_grid_model_ds.visualizer import visualize
     except ImportError as error:
-        print(
-            "Visualization skipped: optional visualizer dependencies are not installed."
-        )
+        print("Visualization skipped: optional visualizer dependencies are not installed.")
         print("Install with: pip install 'power-grid-model-ds[visualizer]'")
         print(f"Import error: {error}")
         return
@@ -173,9 +163,7 @@ def main() -> None:
     create_10_3_kv_net = False
     calculation_method = CalculationMethod.newton_raphson
     output_root = Path(__file__).resolve().parent / "generated"
-    run_name = (
-        f"{datetime.now(timezone.utc).strftime('synthetic_pgm_data_%Y%m%dT%H%M%SZ')}"
-    )
+    run_name = f"{datetime.now(timezone.utc).strftime('synthetic_pgm_data_%Y%m%dT%H%M%SZ')}"
 
     n_steps = nr_days * 24 * (60 // step_minutes)
     run_dir = output_root / run_name
@@ -243,9 +231,7 @@ def main() -> None:
     print(f"Wrote update_data to: {update_path}")
     print(f"Wrote power_flow output to: {output_path}")
     print(f"Wrote generation params to: {params_path}")
-    print(
-        f"Grid nodes: {len(input_data[_find_component_key(input_data, ComponentType.node)])}"
-    )
+    print(f"Grid nodes: {len(input_data[_find_component_key(input_data, ComponentType.node)])}")
     print(f"Symmetric loads: {len(input_data[sym_load_key])}")
     print(f"Time steps: {n_steps} ({nr_days} days at {step_minutes}-minute resolution)")
 
