@@ -222,4 +222,4 @@ __marimo__/
 # Synthetic test data generation outputs
 src/data/generated/
 
-.claude/settings.local.json
+.claude
