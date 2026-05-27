@@ -5,7 +5,6 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "marimo>=0.23.8",
     "matplotlib>=3.10.9",
     "power-grid-model>=1.13.77",
     "power-grid-model-ds>=1.9.4",
