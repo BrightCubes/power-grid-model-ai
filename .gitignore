@@ -221,3 +221,5 @@ __marimo__/
 
 # Synthetic test data generation outputs
 tests/data/generated/
+
+.claude
