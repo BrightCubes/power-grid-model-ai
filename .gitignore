@@ -220,6 +220,6 @@ __marimo__/
 .streamlit/secrets.toml
 
 # Synthetic test data generation outputs
-src/data/generated/
+tests/data/generated/
 
 .claude
