@@ -1,0 +1,14 @@
+{
+  "skill_name": "power-grid-analysis",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I have a PGM medium-voltage network in `tests/data/generated/pgm_data_20260526T140402Z/synthetic_input_data.json`. Load profile updates for a 2-day simulation (192 steps at 15-minute intervals) are in `synthetic_update_data.json` in the same folder. I need to: (1) run power flow calculations for all timesteps, (2) find which lines are overloaded (loading > 80%) and how often, and (3) create a summary plot showing loading over time for the worst lines.",
+      "expected_output": "A working Python script that loads PGM JSON data, runs batch power flow using PowerGridModel or PowerGridModelInterface, identifies overloaded lines (loading > 80%), and produces a matplotlib plot showing loading over time for the worst offenders. The script should run successfully and produce a plot file.",
+      "files": [
+        "tests/data/generated/pgm_data_20260526T140402Z/synthetic_input_data.json",
+        "tests/data/generated/pgm_data_20260526T140402Z/synthetic_update_data.json"
+      ]
+    }
+  ]
+}
