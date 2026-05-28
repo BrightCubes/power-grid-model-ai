@@ -23,7 +23,26 @@ This skill is for operations across the full `power-grid-model` ecosystem. The r
 | **Less Popular Libraries** | If you need any library outside the permitted list, ask the user for confirmation first. |
 | **Ask Questions** | When requirements are unclear at any step, pause and ask the user for clarification. |
 
+## Python Script Standards
+When delivering code as a Python script (`.py`):
+- Organise all logic into well-named functions (e.g. `load_data()`, `run_power_flow()`, `plot_results()`).
+- Include a `main()` function that calls them in order and contains no business logic itself.
+- End every script with `if __name__ == "__main__": main()`.
+
+## Plot Standards
+When producing time-series plots:
+- Always show real dates and times on the x-axis, not bare hours-from-zero.
+- Build a `pd.DatetimeIndex` or `np.datetime64` array for the x-axis. If the start datetime cannot be derived from the data, ask the user before proceeding.
+- Use `matplotlib.dates` (`AutoDateLocator`, `AutoDateFormatter`, or `mdates.DateFormatter`) so tick labels display as human-readable date/time strings (e.g. `2026-05-26 00:00`).
+
 Use the following task-first workflow.
+
+## Step 0: Clarify Output Format
+Before writing any code, ask the user:
+
+> "Should I write this as a Python script (`.py`) or a Jupyter notebook (`.ipynb`)?"
+
+Wait for the answer and apply the appropriate standard (see **Python Script Standards** above for `.py`; use logical cell structure with markdown headings for `.ipynb`).
 
 ## Step 1: Classify the Task
 Classify the user request into one or more of the following tasks:
@@ -79,8 +98,11 @@ Always return task-appropriate outputs:
 - Summaries/charts and interpretation for result-explanation tasks.
 
 ## Completion Criteria
+- [ ] Output format (`.py` or `.ipynb`) was confirmed with the user before writing code.
 - [ ] The user request was classified into the correct PGM task(s).
 - [ ] Data was deserialized/converted and validated where required.
 - [ ] Appropriate ecosystem layers (PGM/PGM-DS/PGM-IO) were used for the task.
 - [ ] Deliverables were provided in a task-appropriate form (code, diagnostics, or explanation).
+- [ ] Python scripts use functions and a `main()` entry point (if output format is `.py`).
+- [ ] Time-series plots show real dates/times on the x-axis (if plots were produced).
 - [ ] Verified that no unauthorized external dependencies were used.
