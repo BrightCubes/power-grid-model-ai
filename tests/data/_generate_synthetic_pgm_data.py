@@ -130,6 +130,90 @@ def run_power_flow(
     )
 
 
+def update_data_causes_error(
+    input_data: dict,
+    update_data: dict,
+    calculation_method: CalculationMethod,
+) -> bool:
+    try:
+        validate_datasets(input_data=input_data, update_data=update_data)
+        run_power_flow(
+            input_data=input_data,
+            update_data=update_data,
+            calculation_method=calculation_method,
+        )
+    except Exception:
+        return True
+    return False
+
+
+def subset_sym_load_update_data(
+    update_data: dict,
+    scenario_indices: list[int],
+    load_indices: list[int],
+) -> dict:
+    sym_load_key = _find_component_key(update_data, ComponentType.sym_load)
+    sym_load_update = update_data[sym_load_key]
+    return {sym_load_key: sym_load_update[np.ix_(scenario_indices, load_indices)].copy()}
+
+
+def isolate_minimal_reproducible_sym_load_case(
+    input_data: dict,
+    update_data: dict,
+    calculation_method: CalculationMethod,
+) -> dict:
+    if not update_data_causes_error(
+        input_data=input_data,
+        update_data=update_data,
+        calculation_method=calculation_method,
+    ):
+        raise ValueError("The provided datasets do not reproduce an error.")
+
+    sym_load_key = _find_component_key(update_data, ComponentType.sym_load)
+    sym_load_update = update_data[sym_load_key]
+    scenario_indices = list(range(sym_load_update.shape[0]))
+    load_indices = list(range(sym_load_update.shape[1]))
+
+    for scenario_index in tuple(scenario_indices):
+        candidate = [index for index in scenario_indices if index != scenario_index]
+        if not candidate:
+            continue
+        candidate_update = subset_sym_load_update_data(update_data, candidate, load_indices)
+        if update_data_causes_error(
+            input_data=input_data,
+            update_data=candidate_update,
+            calculation_method=calculation_method,
+        ):
+            scenario_indices = candidate
+
+    for load_index in tuple(load_indices):
+        candidate = [index for index in load_indices if index != load_index]
+        if not candidate:
+            continue
+        candidate_update = subset_sym_load_update_data(update_data, scenario_indices, candidate)
+        if update_data_causes_error(
+            input_data=input_data,
+            update_data=candidate_update,
+            calculation_method=calculation_method,
+        ):
+            load_indices = candidate
+
+    return subset_sym_load_update_data(update_data, scenario_indices, load_indices)
+
+
+def inject_invalid_sym_load_update(
+    input_data: dict,
+    update_data: dict,
+    scenario_index: int,
+    load_index: int,
+) -> int:
+    sym_load_input_key = _find_component_key(input_data, ComponentType.sym_load)
+    invalid_id = int(np.max(input_data[sym_load_input_key]["id"])) + 1
+    sym_load_key = _find_component_key(update_data, ComponentType.sym_load)
+    update_data[sym_load_key]["id"][scenario_index, load_index] = invalid_id
+    return invalid_id
+
+
 def maybe_visualize_grid(
     grid: Grid,
     update_data: BatchDataset,
