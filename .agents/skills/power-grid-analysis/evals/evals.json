@@ -166,6 +166,24 @@
       ]
     },
     {
+      "id": 11,
+      "enabled": true,
+      "skill_usefulness_score": 10,
+      "title": "N-1 Contingency Screening via Programmatically Constructed Batch Updates",
+      "prompt": "Load `data/synthetic_pgm_data_20260531T143646Z/synthetic_input_data.json` using PGM-IO. Do NOT use any pre-built update file. Instead, programmatically construct an N-1 batch update dataset using `initialize_array` from `power_grid_model`: one scenario per branch (line and/or link) in the network, where that branch's `status` is set to `0` (out of service) and all others remain at base-case values. Run symmetric batch power flow with `CalculationMethod.newton_raphson` and `continue_on_batch_error=True`. For each scenario produce: (a) whether the power flow converged or diverged (islanded network), (b) the number of nodes violating the ±5% nominal voltage band (u_pu outside [0.95, 1.05]), and (c) the number of branches exceeding 100% of their rated current. Save a full contingency ranking table (sorted by total violations descending) to `outputs/n1_contingency_ranking.csv` and a markdown summary of the top-5 critical outages to `outputs/n1_summary.md`. Use only PGM ecosystem dependencies.",
+      "expected_output": "A Python script that uses initialize_array to build the N-1 batch update data from scratch, runs batch power flow with continue_on_batch_error=True, and saves a contingency ranking CSV and a markdown summary of critical outages.",
+      "files": [
+        "data/synthetic_pgm_data_20260531T143646Z/synthetic_input_data.json"
+      ],
+      "expectations": [
+        "The solution imports and calls initialize_array from power_grid_model to construct the batch update arrays — this is the PGM-specific API that general LLMs will not know; using manually built numpy dtypes or wrong field names will cause a runtime error",
+        "Branch status fields are set using the exact PGM field name 'status' (not 'enabled', 'active', or 'in_service') with value 0 to take each branch out of service",
+        "model.calculate_power_flow() is called with update_data built from initialize_array and with continue_on_batch_error=True so diverged (islanded) scenarios are captured rather than raising an exception",
+        "Voltage violations are counted per scenario by checking node u_pu output arrays against the [0.95, 1.05] band",
+        "A contingency ranking CSV sorted by total violations (voltage violations + branch overloads) is saved to the outputs directory alongside a markdown top-5 summary"
+      ]
+    },
+    {
       "id": 10,
       "enabled": true,
       "skill_usefulness_score": 8,
