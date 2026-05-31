@@ -7,6 +7,8 @@ description: "Use when: working on any power-grid-model ecosystem task, includin
 
 This skill is for operations across the full `power-grid-model` ecosystem. The repositories are tools; the user request defines the task.
 
+Prompt starters are available in `PROMPT_LIBRARY.md`.
+
 ## Ecosystem Tool Roles
 - `power-grid-model` (PGM): core calculations and validation APIs.
 - `power-grid-model-ds` (PGM-DS): application-layer grid objects, graph/topology operations, mutations, and visualizer workflows.
