@@ -1,0 +1,53 @@
+{
+  "skill_name": "power-grid-analysis",
+  "evals": [
+    {
+      "id": 1,
+      "enabled": false,
+      "title": "Power-Flow Input Validation Report",
+      "prompt": "Validate `data/synthetic_pgm_data_20260531T143646Z/synthetic_input_data.json` for power flow using power-grid-model's `validate_input_data` or `assert_valid_input_data` function. Generate a markdown findings report at `data/synthetic_pgm_data_20260531T143646Z/validation_report.md` that covers: (1) any hard validation failures, (2) likely modeling mistakes, and (3) realism anomalies such as mixed-sign load injections or unusually large load magnitudes. Show the code or commands used.",
+      "expected_output": "A markdown file at data/synthetic_pgm_data_20260531T143646Z/validation_report.md listing hard validation failures, likely modeling mistakes, and realism anomalies for the synthetic power-flow fixture. Code or commands used to run the validation should be shown.",
+      "files": ["data/synthetic_pgm_data_20260531T143646Z/synthetic_input_data.json"],
+      "expectations": [
+        "A markdown report file is created at the requested synthetic-data path or another clearly named output location",
+        "The report references using power-grid-model's validate_input_data or assert_valid_input_data function",
+        "The report identifies the fixture as a synthetic medium-voltage power-flow dataset with about 101 nodes, 100 symmetric loads, and one source",
+        "The report includes at least one engineering or realism finding beyond a simple 'all clear', such as mixed-sign load injections or unusually large individual load magnitudes"
+      ]
+    },
+    {
+      "id": 2,
+      "enabled": false,
+      "title": "Batch Power-Flow Results Interpretation",
+      "prompt": "Read `data/synthetic_pgm_data_20260531T143646Z/synthetic_power_flow_output_data.json` and produce a concise interpretation of the 192-step batch results. Cover: (1) voltage profile across nodes and time steps, (2) branch loading levels, (3) active and reactive losses, and (4) source reactive power behavior. Conclude with a plain-language operations summary suitable for a non-expert reader.",
+      "expected_output": "A written explanation covering the synthetic batch power-flow results: voltage profile, branch loading, losses, source/load reactive behavior, and a plain-language operations conclusion.",
+      "files": ["data/synthetic_pgm_data_20260531T143646Z/synthetic_power_flow_output_data.json"],
+      "expectations": [
+        "A written interpretation report is saved to a file in the outputs directory",
+        "The report identifies that the file is a 192-step batch sym_output result rather than a single snapshot",
+        "The report discusses that node voltages are broadly close to nominal in the sampled synthetic feeder instead of claiming collapse-level undervoltage",
+        "The report addresses branch loading and source reactive support using the actual line/source outputs from the synthetic dataset",
+        "The report contains a plain-language or operator-facing conclusion section"
+      ]
+    },
+    {
+      "id": 3,
+      "enabled": true,
+      "title": "State-Estimation Sensor Coverage and Quality Diagnosis",
+      "prompt": "Assess the following synthetic state-estimation dataset:\n- `data/synthetic_state_estimation_data_20260531T143924Z/synthetic_state_estimation_input_data.json`\n- `data/synthetic_state_estimation_data_20260531T143924Z/synthetic_state_estimation_update_data.json`\n- `data/synthetic_state_estimation_data_20260531T143924Z/synthetic_state_estimation_output_data.json`\n\nProduce a diagnosis-style report with two clearly separated sections: (1) sensor coverage and measurement uncertainty assumptions (including sigma fields and observability), and (2) estimated result quality with a numbered checklist of where to check first for bad data or weak confidence — for example, largest residuals, suspicious voltage trajectories, or source injection outliers over the 192-step batch.",
+      "expected_output": "A diagnosis report that summarizes the sensorized synthetic dataset, evaluates state-estimation readiness from available measurements, and gives a numbered checklist for validating estimation quality without relying on hidden ground truth.",
+      "files": [
+        "data/synthetic_state_estimation_data_20260531T143924Z/synthetic_state_estimation_input_data.json",
+        "data/synthetic_state_estimation_data_20260531T143924Z/synthetic_state_estimation_update_data.json",
+        "data/synthetic_state_estimation_data_20260531T143924Z/synthetic_state_estimation_output_data.json"
+      ],
+      "expectations": [
+        "A diagnosis report file is saved to the outputs directory",
+        "The report separates findings into at least two categories such as sensor/input coverage and estimator result quality",
+        "The report identifies that the synthetic input includes about 101 voltage sensors and 101 power sensors",
+        "The report identifies that measurement noise is intentional and should be assessed against sigma fields, residual trends, or temporal consistency rather than treated as raw data corruption",
+        "The report provides at least one concrete next check such as reviewing the largest residuals, inspecting voltage trajectories, or checking source injections over the 192-step batch"
+      ]
+    }
+  ]
+}
