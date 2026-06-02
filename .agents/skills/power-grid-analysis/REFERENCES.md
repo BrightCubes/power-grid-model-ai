@@ -12,6 +12,10 @@ Detailed references now live in:
 
 ## Quick Navigation
 
+Prompt examples for this skill:
+
+- `PROMPT_LIBRARY.md`
+
 If you need core calculations:
 
 - `references/pgm/README.md`
