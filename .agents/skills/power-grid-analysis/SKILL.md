@@ -26,6 +26,7 @@ Prompt starters are available in `PROMPT_LIBRARY.md`.
 | **Ask Questions** | When requirements are unclear at any step, pause and ask the user for clarification. |
 
 ## Python Script Standards
+If the user provided other python standards always use these. Otherwise, use the following rules:
 When delivering code as a Python script (`.py`):
 - Organise all logic into well-named functions (e.g. `load_data()`, `run_power_flow()`, `plot_results()`).
 - Include a `main()` function that calls them in order and contains no business logic itself.
