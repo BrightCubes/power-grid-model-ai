@@ -223,3 +223,6 @@ __marimo__/
 tests/data/generated/
 
 .claude
+
+# skill evaluation results
+.agents/skills/power-grid-analysis-workspace
