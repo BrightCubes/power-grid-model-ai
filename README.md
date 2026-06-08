@@ -6,7 +6,21 @@ SPDX-License-Identifier: MPL-2.0
 
 # power-grid-model-ai
 
-power-grid-model AI toolkit
+An Agent skill for a pair programming agent that assists grid operators working with the [power-grid-model](https://github.com/PowerGridModel/power-grid-model) (PGM) Python ecosystem.
+
+The skill enables an AI agent to help with the full PGM workflow: loading and converting grid data, running power flow and other studies, validating results, and explaining findings — all using the `power-grid-model`, `power-grid-model-ds`, and `power-grid-model-io` libraries.
+
+## Skill
+
+The agent skill is defined in [.agents/skills/power-grid-analysis/SKILL.md](.agents/skills/power-grid-analysis/SKILL.md). It covers:
+
+- **Data ingestion** — deserializing PGM JSON and converting from external formats (Vision, Pandapower, tabular)
+- **Validation** — input data validation and engineering plausibility checks
+- **Calculations** — power flow, state estimation, and short-circuit studies
+- **Result evaluation** — interpreting and explaining calculation outputs
+- **Debugging** — diagnosing failures and inconsistent results
+
+Reference documentation for the skill lives in [.agents/skills/power-grid-analysis/references/](.agents/skills/power-grid-analysis/references/).
 
 ## Development
 
@@ -15,3 +29,30 @@ To install requirements run:
 ```bash
 uv sync
 ```
+
+### Installing the skill-creator
+
+The eval loop requires the `skill-creator` skill. How to install it depends on your agent:
+
+**Claude Code** — run `/plugins` and install from the official plugins repository, or install directly with:
+```
+/plugins install https://github.com/anthropics/claude-plugins-official/blob/main/plugins/skill-creator/skills/skill-creator/SKILL.md
+```
+
+**Other agents** — download the [skill-creator directory](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/skill-creator/skills/skill-creator) and place it in your agent's skills directory (e.g. `.agents/skills/skill-creator`).
+
+
+### Running skill evaluations
+
+Skill development follows an iterative eval loop managed by the `skill-creator` agent skill. To start, open this repository in an agent that has `skill-creator` available and use a prompt like:
+
+> "Run the evaluations for the power-grid-analysis skill at `.agents/skills/power-grid-analysis`"
+
+The agent will take it from there:
+
+1. **Run evals** — the agent runs test cases with and without the skill and saves results under `.agents/skills/power-grid-analysis-workspace/iteration-N/`.
+2. **Review results** — the agent opens a viewer where you leave feedback on each test case.
+3. **Iterate** — based on your feedback, the agent improves the skill and reruns the evals.
+4. **Optimize triggering** — once the skill content is stable, the agent can optimize the description so the skill triggers reliably.
+
+Test cases are stored in [.agents/skills/power-grid-analysis/evals/evals.json](.agents/skills/power-grid-analysis/evals/evals.json).
