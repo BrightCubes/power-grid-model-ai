@@ -227,3 +227,5 @@ tests/issues
 
 # skill evaluation results
 .agents/skills/power-grid-analysis-workspace
+tests/issues
+

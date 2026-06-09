@@ -4,15 +4,17 @@ SPDX-FileCopyrightText: Contributors to the Power Grid Model project <powergridm
 SPDX-License-Identifier: MPL-2.0
 -->
 
-# power-grid-model-ai
+# Power Grid Model Skills
 
-An Agent skill for a pair programming agent that assists grid operators working with the [power-grid-model](https://github.com/PowerGridModel/power-grid-model) (PGM) Python ecosystem.
+A collection of agent skills for working with the [power-grid-model](https://github.com/PowerGridModel/power-grid-model) (PGM) Python ecosystem.
 
-The skill enables an AI agent to help with the full PGM workflow: loading and converting grid data, running power flow and other studies, validating results, and explaining findings — all using the `power-grid-model`, `power-grid-model-ds`, and `power-grid-model-io` libraries.
+## Skills
 
-## Skill
+### power-grid-analysis
 
-The agent skill is defined in [.agents/skills/power-grid-analysis/SKILL.md](.agents/skills/power-grid-analysis/SKILL.md). It covers:
+A **pair-programming** skill that assists grid operators with the full PGM workflow: loading and converting grid data, running power flow and other studies, validating results, and explaining findings — all using the `power-grid-model`, `power-grid-model-ds`, and `power-grid-model-io` libraries.
+
+Defined in [.agents/skills/power-grid-analysis/SKILL.md](.agents/skills/power-grid-analysis/SKILL.md). It covers:
 
 - **Data ingestion** — deserializing PGM JSON and converting from external formats (Vision, Pandapower, tabular)
 - **Validation** — input data validation and engineering plausibility checks
@@ -21,6 +23,19 @@ The agent skill is defined in [.agents/skills/power-grid-analysis/SKILL.md](.age
 - **Debugging** — diagnosing failures and inconsistent results
 
 Reference documentation for the skill lives in [.agents/skills/power-grid-analysis/references/](.agents/skills/power-grid-analysis/references/).
+
+### pgm-issue-analysis
+
+A **dedicated issue-debugging** skill for investigating errors and unexpected results in PGM. Defined in [.agents/skills/pgm-issues/SKILL.md](.agents/skills/pgm-issues/SKILL.md). You can use the skill to an initial investigation into an issue or error you get when working with PGM. This skill is especially usefull when encountering a **SparseMatrixError** or **IterationDiverge Error**. The skill create a **Minimal Reproducible Case** which helps in understanding what the root cause of the problem is. 
+It follows a structured five-step investigation workflow:
+
+1. **Reproduce** — run the user's data as-is and confirm the exact error
+2. **Understand the data** — build a structural picture of the network (voltage levels, topology, transformer connections)
+3. **Validate** — run PGM's built-in validation plus cross-component consistency and physical plausibility checks
+4. **Minimal reproducible example** — reduce the dataset to the fewest components that still trigger the failure
+5. **Diagnose** — classify the root cause as a user data bug or a potential PGM bug
+
+The skill produces a `report.ipynb` Jupyter notebook with its findings. Each investigation step is also saved as a numbered Python script (`step1_reproduce.py`, etc.) for full traceability.
 
 ## Development
 
