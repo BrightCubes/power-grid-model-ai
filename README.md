@@ -53,13 +53,6 @@ Then install the skills into your coding agent:
 # Install both Skills
 npx skills install https://github.com/PowerGridModel/power-grid-model-ai
 
-# Install the power-grid-analysis skill
-npx skills install https://github.com/PowerGridModel/power-grid-model-ai/blob/main/.agents/skills/power-grid-analysis/SKILL.md
-
-# Install the pgm-issue-analysis skill
-npx skills install https://github.com/PowerGridModel/power-grid-model-ai/blob/main/.agents/skills/pgm-issues/SKILL.md
-```
-
 ## Development
 
 To install requirements run:
