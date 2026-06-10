@@ -26,7 +26,7 @@ Reference documentation for the skill lives in [.agents/skills/power-grid-analys
 
 ### pgm-issue-analysis
 
-A **dedicated issue-debugging** skill for investigating errors and unexpected results in PGM. Defined in [.agents/skills/pgm-issues/SKILL.md](.agents/skills/pgm-issues/SKILL.md). You can use the skill to an initial investigation into an issue or error you get when working with PGM. This skill is especially usefull when encountering a **SparseMatrixError** or **IterationDiverge Error**. The skill create a **Minimal Reproducible Case** which helps in understanding what the root cause of the problem is. 
+A **dedicated issue-debugging** skill for investigating errors and unexpected results in PGM. Defined in [.agents/skills/pgm-issues/SKILL.md](.agents/skills/pgm-issues/SKILL.md). You can use the skill to an initial investigation into an issue or error you get when working with PGM. This skill is especially usefull when encountering a **SparseMatrixError** or **IterationDiverge Error**. The skill create a **Minimal Reproducible Case** which helps in understanding what the root cause of the problem is.
 It follows a structured five-step investigation workflow:
 
 1. **Reproduce** — run the user's data as-is and confirm the exact error
@@ -36,6 +36,17 @@ It follows a structured five-step investigation workflow:
 5. **Diagnose** — classify the root cause as a user data bug or a potential PGM bug
 
 The skill produces a `report.ipynb` Jupyter notebook with its findings. Each investigation step is also saved as a numbered Python script (`step1_reproduce.py`, etc.) for full traceability.
+
+## Installation
+
+Skills are installed using `npx skills`, a package manager for agent skills. See [skills.sh](https://skills.sh) for more information.
+To install the skills into your coding agent run:
+
+```bash
+npx skills install https://github.com/PowerGridModel/power-grid-model-ai
+```
+
+<br><br><br>
 
 ## Development
 
@@ -50,12 +61,12 @@ uv sync
 The eval loop requires the `skill-creator` skill. How to install it depends on your agent:
 
 **Claude Code** — run `/plugins` and install from the official plugins repository, or install directly with:
-```
+
+```bash
 /plugins install https://github.com/anthropics/claude-plugins-official/blob/main/plugins/skill-creator/skills/skill-creator/SKILL.md
 ```
 
 **Other agents** — download the [skill-creator directory](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/skill-creator/skills/skill-creator) and place it in your agent's skills directory (e.g. `.agents/skills/skill-creator`).
-
 
 ### Running skill evaluations
 
