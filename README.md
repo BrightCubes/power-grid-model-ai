@@ -43,6 +43,7 @@ Skills are installed using `npx skills`, a package manager for agent skills. See
 To install the skills into your coding agent run:
 
 ```bash
+# the skills package will ask you which skill you would like to install (power-grid-analysis or pgm-issue-analysis)
 npx skills install https://github.com/PowerGridModel/power-grid-model-ai
 ```
 
