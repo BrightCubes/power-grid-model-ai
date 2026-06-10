@@ -39,15 +39,8 @@ The skill produces a `report.ipynb` Jupyter notebook with its findings. Each inv
 
 ## Installation
 
-Skills are installed using [`npx skills`](https://skills.sh), a package manager for agent skills. See [skills.sh](https://skills.sh) for more information.
-
-First, ensure you have `npx skills` available (requires Node.js):
-
-```bash
-npm install -g skills
-```
-
-Then install the skills into your coding agent:
+Skills are installed using [`npx skills`](https://skills.sh), a package manager for agent skills. See [skills.sh](https://skills.sh) for more information. 
+To install the skills into your coding agent:
 
 ```bash
 # Install both Skills
