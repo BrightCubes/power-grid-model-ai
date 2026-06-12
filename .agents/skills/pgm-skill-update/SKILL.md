@@ -5,77 +5,116 @@ description: "Use when: the user wants to update the power-grid-analysis skill r
 
 # PGM Skill Update Workflow
 
-This skill reviews recent `power-grid-model` releases and determines whether any changes warrant updates to the reference files in the `power-grid-analysis` skill.
+This skill reviews recent releases across the `power-grid-model` ecosystem and determines whether any changes warrant updates to the reference files in the `power-grid-analysis` skill.
 
-## Step 0: Clarify Time Window
+## Step 0: Read Current Version Status
 
-If the user has not specified a time window, ask:
+Read `.agents/skills/power-grid-analysis/SKILL.md` and locate the **Package Version Status** section near the top. Report the currently recorded versions and last-checked date to the user — this is the baseline for deciding which releases to look at.
 
-> "What time window should I look at? (e.g. last 2 weeks, since version X, since date Y)"
+## Step 1: Clarify Scope
+
+If the user has not specified a scope, ask:
+
+> "Which packages should I check, and over what range?
+>
+> - **PGM (main)**: what is the target minor/major version to check up to? (default: latest)
+> - **PGM-DS and PGM-IO**: what time window? (default: last 2 weeks)"
 
 Wait for the answer before proceeding.
 
-## Step 1: Fetch Release List
+## Step 2: Fetch PGM Releases (Minor/Major Only)
 
-Fetch the releases page for the `power-grid-model` repository:
+Fetch the releases page:
 
 - URL: `https://github.com/PowerGridModel/power-grid-model/releases`
-- Extract: version tag, release date, and one-line summary for each release within the time window.
 
-## Step 2: Filter and Present Relevant Releases
+Include **only minor or major version releases** (e.g. `1.14.0`, `2.0.0`) that are newer than the version recorded in Step 0. Skip all patch releases (e.g. `1.13.1`, `1.13.2`).
 
-Discard releases that are **only** one or more of the following:
+For each qualifying release, extract two things:
+
+1. The **highlights** section of the changelog — the bulleted summary of the most important changes. This is the primary focus.
+2. The **full changelog** — the remainder of the release notes covering smaller changes not mentioned in the highlights.
+
+## Step 3: Fetch PGM-DS Releases
+
+Fetch the releases page:
+
+- URL: `https://github.com/PowerGridModel/power-grid-model-ds/releases`
+
+Include **all releases** within the agreed time window. Extract: version tag, release date, and one-line summary for each.
+
+## Step 4: Fetch PGM-IO Releases
+
+Fetch the releases page:
+
+- URL: `https://github.com/PowerGridModel/power-grid-model-io/releases`
+
+Include **all releases** within the agreed time window. Extract: version tag, release date, and one-line summary for each.
+
+## Step 5: Filter and Present Releases
+
+For **all packages**, discard releases that are **only** one or more of the following:
+
 - CI/CD or GitHub Actions dependency updates
 - Lock file or linter dependency bumps
 - Pure documentation formatting or terminology fixes with no API impact
 
-For everything that remains, **output a short list to the user** showing: version, date, and one-line summary. This gives the user visibility before deeper analysis begins.
+Present the filtered releases to the user in three separate sections before continuing:
 
-## Step 3: Read the Skill Reference Files
+**PGM** — version · date · one-line summary
+**PGM-DS** — version · date · one-line summary
+**PGM-IO** — version · date · one-line summary
 
-Read all `.md` files under `.agents/skills/power-grid-analysis/references/pgm/`:
+If a package has no qualifying releases, state that clearly in its section.
 
-- `README.md`
-- `overview-and-entrypoints.md`
-- `data-model-components-and-datasets.md`
-- `calculation-recipes.md`
-- `batch-validation-serialization.md`
-- `errors-and-debugging.md`
+## Step 6: Read Skill Reference Files
 
-Read all files before moving to the next step. This gives you the full picture of what is already documented so you can identify genuine gaps.
+Read all reference files across all three layers before moving to the next step. This gives the full picture of what is already documented.
 
-## Step 4: Cross-Reference Against References
+**PGM** (`.agents/skills/power-grid-analysis/references/pgm/`)
 
-For each release in the filtered list, decide whether it could affect any of the reference files read in Step 3. Base this on the one-line summary alone — do not fetch PRs yet.
+**PGM-DS** (`.agents/skills/power-grid-analysis/references/pgm-ds/`)
 
-Criteria for "potentially relevant":
+**PGM-IO** (`.agents/skills/power-grid-analysis/references/pgm-io/`)
+
+## Step 7: Cross-Reference Against References
+
+For each release in the filtered list, decide whether it could affect any of the reference files read in Step 6. Start by matching each release to its corresponding reference layer (PGM → pgm refs, PGM-DS → pgm-ds refs, PGM-IO → pgm-io refs), but also flag cross-layer impacts where relevant.
+
+For PGM releases, evaluate highlights first; then check the full changelog for smaller changes that may still affect a reference.
+
+**Criteria for "potentially relevant":**
+
 - New component type, attribute, or dataset term
 - Changed or removed API (method name, parameter, return shape)
 - New error or changed error condition that users would encounter
 - New calculation method or option
+- New converter, data store, or external format support
+- New `Grid` object, graph algorithm, or topology operation
 - Behavioral change to an existing component or calculation
 
-Criteria for "skip":
+**Criteria for "skip":**
+
 - Internal solver improvement with no user-facing API or behavioral change
-- Feature already covered in the references
-- Feature explicitly marked as incomplete or pending validation in the summary
+- Feature already accurately covered in the references
+- Feature explicitly marked as incomplete or pending validation in the release notes
 
-Retain only the changes that pass this filter. If nothing passes, state that clearly and stop — no further steps needed.
+If nothing passes for a package, state that clearly for that section and move on.
 
-## Step 5: Fetch Full PR for Each Relevant Change
+## Step 8: Fetch Full PR for Each Relevant Change
 
-For each change that passed Step 4, fetch the pull request page in full. Extract:
+For each change that passed Step 7, fetch the pull request page in full. Extract:
 
 - **Motivation**: why the change was made
 - **Exact API impact**: what is added, changed, or removed
 - **Constraints or known issues**: anything incomplete, pending, or with caveats
-- **Stability**: is this fully validated and documented upstream, or a partial/in-progress implementation?
+- **Stability**: fully validated and documented upstream, or partial/in-progress?
 
-Use this information to decide whether a reference file update is warranted. Discard changes where the PR reveals the feature is incomplete, not yet validated, or purely internal.
+Discard changes where the PR reveals the feature is incomplete, not yet validated, or purely internal.
 
-## Step 6: Formulate Concrete Suggestions
+## Step 9: Formulate Concrete Suggestions
 
-For each surviving change, produce a specific edit proposal:
+Grouped by package (**PGM**, **PGM-DS**, **PGM-IO**), produce a specific edit proposal for each surviving change:
 
 - Which file to edit (with path)
 - Approximate location (section heading or line reference)
@@ -83,14 +122,29 @@ For each surviving change, produce a specific edit proposal:
 - Why it improves the reference
 
 Do **not** suggest:
+
 - Deprecation notices that will need to be removed later
-- Features that the upstream docs or validator still reject
+- Features that upstream docs or validators still reject
 - Anything already accurately covered by the current reference text
 
-## Step 7: Present to User for Approval
+## Step 10: Present to User for Approval
 
-Present each suggestion clearly. For each one state:
+Present each suggestion grouped by package. For each one state:
+
 - The proposed change (file, location, exact text)
 - The source (PR number and one-sentence rationale)
 
 Wait for explicit approval before making any edits. "No change needed" is a valid and complete outcome.
+
+## Step 11: Update Version Status
+
+After all approved edits are applied (or if no edits were needed), update the **Package Version Status** section in `.agents/skills/power-grid-analysis/SKILL.md` to reflect the versions just reviewed and today's date.
+
+Format:
+
+```
+## Package Version Status
+Last reviewed: PGM vX.Y.Z · PGM-DS vX.Y.Z · PGM-IO vX.Y.Z (checked YYYY-MM-DD)
+```
+
+Only update a package's version entry if it was actually checked in this run. Leave the others unchanged.
