@@ -41,6 +41,7 @@ Current caveats include:
 - Some switch-related attributes are unsupported.
 - External grid/source impedance treatment differs.
 - Transformer and three-winding transformer feature gaps exist for some zero-sequence and phase-shift settings.
+- `trafo.mag0_percent` (zero-sequence magnetizing impedance) is interpreted as a percentage for pandapower >= 3.4.0 as of PGM-IO v1.3.44; keep pandapower versions aligned when converting zero-sequence transformer parameters.
 
 ## Asymmetric Workflows
 Asymmetric examples are supported with converted input and `calculate_power_flow(symmetric=False)`, then conversion back to pandapower result tables.

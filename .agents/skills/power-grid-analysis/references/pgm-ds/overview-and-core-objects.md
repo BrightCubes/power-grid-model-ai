@@ -45,6 +45,8 @@ Design notes:
 - `graphs` with active and complete topology views
 - ID integrity across arrays
 
+Available component arrays on `Grid` include: `node`, `line`, `link`, `transformer`, `three_winding_transformer`, `generic_branch`, `asym_line`, `source`, `sym_load`, `sym_gen`, `asym_load`, `asym_gen`, `shunt`, `voltage_regulator`, `transformer_tap_regulator`, the `sym_`/`asym_` `power`/`voltage`/`current` sensors, and `fault`. (`asym_load`, `asym_gen`, `shunt`, `voltage_regulator`, `fault`, and the asym power sensor array were added in PGM-DS v1.8.0; `shunt` uses `g1`/`b1` and has no `u_ref`.)
+
 Useful properties/methods:
 - `branch_arrays`, `branches`
 - `append(array)`

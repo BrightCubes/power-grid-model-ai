@@ -10,6 +10,8 @@ Use these instead of manual array edits to keep graph consistency.
 - `grid.make_active(branch)`
 - `grid.make_inactive(branch, at_to_side=True)`
 
+> Since PGM-DS v1.9.1, `grid.delete_node(...)` and `grid.delete_branch(...)` accept multi-row arrays, so multiple nodes/branches can be deleted in a single call.
+
 > `Grid.add_node` and `Grid.add_branch` were removed in PGM-DS v1.10.0. Use `grid.append(array)` instead.
 
 ## Merge Grids
