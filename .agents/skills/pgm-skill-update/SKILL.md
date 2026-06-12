@@ -1,5 +1,5 @@
 ---
-name: pgm_skill_update
+name: pgm-skill-update
 description: "Use when: the user wants to update the power-grid-analysis skill references with the latest changes from the power-grid-model package, check for deprecations or new features, or keep the skill in sync with recent releases."
 ---
 
