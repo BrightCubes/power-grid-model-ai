@@ -3,14 +3,14 @@
 ## Topology Mutation APIs
 Use these instead of manual array edits to keep graph consistency.
 
-- `grid.append(array)`
-- `grid.add_node(node)`
+- `grid.append(array)` — add nodes/branches/other components
 - `grid.delete_node(node)`
-- `grid.add_branch(branch)`
 - `grid.delete_branch(branch)`
 - `grid.delete_branch3(branch3)`
 - `grid.make_active(branch)`
 - `grid.make_inactive(branch, at_to_side=True)`
+
+> `Grid.add_node` and `Grid.add_branch` were removed in PGM-DS v1.10.0. Use `grid.append(array)` instead.
 
 ## Merge Grids
 ```python
@@ -20,6 +20,8 @@ offset = grid.merge(other_grid, mode="recalculate_ids")
 Modes:
 - `keep_ids`: fail on collisions
 - `recalculate_ids`: offset IDs in incoming grid to avoid collisions
+
+Since PGM-DS v1.10.0, `grid.merge` also works on extended grids: custom arrays declaring `_id_columns` have those columns offset during the merge, not just the standard PGM id columns.
 
 ## Grid Serialization
 ### Preferred portable format (JSON)
@@ -34,14 +36,7 @@ json_text = grid.serialize(mode="json_string")
 loaded = Grid.from_json_string(json_text)
 ```
 
-### Cache format (pickle-based)
-```python
-grid.cache(cache_dir, cache_name="baseline", compress=True)
-loaded = Grid.from_cache(cache_path)
-```
-
-Warning:
-- `from_cache` uses pickle; only use trusted files.
+> The pickle-based cache (`grid.cache(...)` / `Grid.from_cache(...)`) was removed in PGM-DS v1.10.0. Use JSON `serialize` / `deserialize` for persistence.
 
 ## Visualizer Quickstart
 ```python
@@ -51,6 +46,15 @@ visualize(grid)
 ```
 
 This starts a local dashboard (default localhost).
+
+### Export to standalone HTML
+```python
+from power_grid_model_ds.visualizer import save_html
+
+save_html(grid, "grid.html")
+```
+
+`save_html(grid, path)` writes a self-contained HTML file (Cytoscape.js) without starting the Dash server. Added in PGM-DS v1.10.0.
 
 Optional dependency install:
 ```bash

@@ -36,7 +36,7 @@ Converter includes utilities for switch state and winding extraction:
 ## Important Modeling Differences
 Current caveats include:
 - Focus is power-flow conversion path.
-- PV-related features and some elements are unsupported.
+- `gen` elements are converted (input plus symmetric and three-phase output) as of PGM-IO v1.3.90, sharing the conversion path with `sgen`. Other PV-related features remain unsupported.
 - Delta load type unsupported in PGM conversion.
 - Some switch-related attributes are unsupported.
 - External grid/source impedance treatment differs.

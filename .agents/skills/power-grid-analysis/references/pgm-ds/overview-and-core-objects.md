@@ -23,7 +23,6 @@ grid = Grid.empty()
 
 Other constructors:
 - `Grid.from_txt(...)` and `Grid.from_txt_file(...)`
-- `Grid.from_cache(...)` (pickle-based; trusted sources only)
 - `Grid.deserialize(path)` and `Grid.from_json_string(...)`
 - `RadialGridGenerator(...).run(seed=...)`
 
@@ -62,6 +61,5 @@ Pattern:
 3. Use `PowerGridModelInterface.update_grid()` after calculations.
 
 ## Safety Notes
-- `Grid.from_cache(...)` uses pickle and can execute arbitrary code.
-- Only load cache files from trusted sources.
-- Prefer JSON `serialize`/`deserialize` for portable and safer interchange.
+- The pickle-based cache (`Grid.from_cache` / `grid.cache`) was removed in PGM-DS v1.10.0.
+- Use JSON `serialize` / `deserialize` for portable, safe interchange.
