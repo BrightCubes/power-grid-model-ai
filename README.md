@@ -10,11 +10,11 @@ A collection of agent skills for working with the [power-grid-model](https://git
 
 ## Skills
 
-### power-grid-analysis
+### pgm-assistant
 
 A **pair-programming** skill that assists grid operators with the full PGM workflow: loading and converting grid data, running power flow and other studies, validating results, and explaining findings — all using the `power-grid-model`, `power-grid-model-ds`, and `power-grid-model-io` libraries.
 
-Defined in [.agents/skills/power-grid-analysis/SKILL.md](.agents/skills/power-grid-analysis/SKILL.md). It covers:
+Defined in [.agents/skills/pgm-assistant/SKILL.md](.agents/skills/pgm-assistant/SKILL.md). It covers:
 
 - **Data ingestion** — deserializing PGM JSON and converting from external formats (Vision, Pandapower, tabular)
 - **Validation** — input data validation and engineering plausibility checks
@@ -22,7 +22,7 @@ Defined in [.agents/skills/power-grid-analysis/SKILL.md](.agents/skills/power-gr
 - **Result evaluation** — interpreting and explaining calculation outputs
 - **Debugging** — diagnosing failures and inconsistent results
 
-Reference documentation for the skill lives in [.agents/skills/power-grid-analysis/references/](.agents/skills/power-grid-analysis/references/).
+Reference documentation for the skill lives in [.agents/skills/pgm-assistant/references/](.agents/skills/pgm-assistant/references/).
 
 ### pgm-issue-analysis
 
@@ -43,7 +43,7 @@ Skills are installed using `npx skills`, a package manager for agent skills. See
 To install the skills into your coding agent run:
 
 ```bash
-# the skills package will ask you which skill you would like to install (power-grid-analysis or pgm-issue-analysis)
+# the skills package will ask you which skill you would like to install (pgm-assistant or pgm-issue-analysis)
 npx skills install https://github.com/PowerGridModel/power-grid-model-ai
 ```
 
@@ -73,13 +73,13 @@ The eval loop requires the `skill-creator` skill. How to install it depends on y
 
 Skill development follows an iterative eval loop managed by the `skill-creator` agent skill. To start, open this repository in an agent that has `skill-creator` available and use a prompt like:
 
-> "Run the evaluations for the power-grid-analysis skill at `.agents/skills/power-grid-analysis`"
+> "Run the evaluations for the pgm-assistant skill at `.agents/skills/pgm-assistant`"
 
 The agent will take it from there:
 
-1. **Run evals** — the agent runs test cases with and without the skill and saves results under `.agents/skills/power-grid-analysis-workspace/iteration-N/`.
+1. **Run evals** — the agent runs test cases with and without the skill and saves results under `.agents/skills/pgm-assistant-workspace/iteration-N/`.
 2. **Review results** — the agent opens a viewer where you leave feedback on each test case.
 3. **Iterate** — based on your feedback, the agent improves the skill and reruns the evals.
 4. **Optimize triggering** — once the skill content is stable, the agent can optimize the description so the skill triggers reliably.
 
-Test cases are stored in [.agents/skills/power-grid-analysis/evals/evals.json](.agents/skills/power-grid-analysis/evals/evals.json).
+Test cases are stored in [.agents/skills/pgm-assistant/evals/evals.json](.agents/skills/pgm-assistant/evals/evals.json).

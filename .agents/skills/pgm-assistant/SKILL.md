@@ -1,6 +1,6 @@
 ---
-name: power-grid-analysis
-description: "Use when: working on any power-grid-model ecosystem task, including app building, data conversion, validation, calculations, result explanation, and debugging."
+name: pgm-assistant
+description: "Use when: working on any power-grid-model ecosystem task, including app building, data conversion, validation, grid calculations, result explanation, and debugging. This skill covers the full range of operations across the `power-grid-model` ecosystem, including core calculations (PGM), graph/topology operations and visualizer workflows (PGM-DS), and data format conversions (PGM-IO)."
 ---
 
 # Power Grid Model Ecosystem Operations

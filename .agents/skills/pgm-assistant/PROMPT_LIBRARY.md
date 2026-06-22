@@ -1,6 +1,6 @@
 # Power Grid Analysis Prompt Library
 
-Use these prompts to trigger the `power-grid-analysis` skill with clear intent.
+Use these prompts to trigger the `pgm-assistant` skill with clear intent.
 
 ## How to Use This Library
 

@@ -1,15 +1,15 @@
 ---
 name: pgm-skill-update
-description: "Use when: the user explicitly requests to update the power-grid-analysis skill references with the latest changes from the power-grid-model package, check for deprecations or new features, or keep the skill in sync with recent releases. This skill is used only when explicitly called."
+description: "Use when: the user explicitly requests to update the pgm-assistant skill references with the latest changes from the power-grid-model package, check for deprecations or new features, or keep the skill in sync with recent releases. This skill is used only when explicitly called."
 ---
 
 # PGM Skill Update Workflow
 
-This skill reviews recent releases across the `power-grid-model` ecosystem and determines whether any changes warrant updates to the reference files in the `power-grid-analysis` skill.
+This skill reviews recent releases across the `power-grid-model` ecosystem and determines whether any changes warrant updates to the reference files in the `pgm-assistant` skill.
 
 ## Step 0: Read Current Version Status
 
-Read `.agents/skills/power-grid-analysis/SKILL.md` and locate the **Package Version Status** section near the top. Report the currently recorded versions and last-checked date to the user — this is the baseline for deciding which releases to look at.
+Read `.agents/skills/pgm-assistant/SKILL.md` and locate the **Package Version Status** section near the top. Report the currently recorded versions and last-checked date to the user — this is the baseline for deciding which releases to look at.
 
 ## Step 1: Clarify Scope
 
@@ -71,11 +71,11 @@ If a package has no qualifying releases, state that clearly in its section.
 
 Read all reference files across all three layers before moving to the next step. This gives the full picture of what is already documented.
 
-**PGM** (`.agents/skills/power-grid-analysis/references/pgm/`)
+**PGM** (`.agents/skills/pgm-assistant/references/pgm/`)
 
-**PGM-DS** (`.agents/skills/power-grid-analysis/references/pgm-ds/`)
+**PGM-DS** (`.agents/skills/pgm-assistant/references/pgm-ds/`)
 
-**PGM-IO** (`.agents/skills/power-grid-analysis/references/pgm-io/`)
+**PGM-IO** (`.agents/skills/pgm-assistant/references/pgm-io/`)
 
 ## Step 7: Cross-Reference Against References
 
@@ -138,7 +138,7 @@ Wait for explicit approval before making any edits. "No change needed" is a vali
 
 ## Step 11: Update Version Status
 
-After all approved edits are applied (or if no edits were needed), update the **Package Version Status** section in `.agents/skills/power-grid-analysis/SKILL.md` to reflect the versions just reviewed and today's date.
+After all approved edits are applied (or if no edits were needed), update the **Package Version Status** section in `.agents/skills/pgm-assistant/SKILL.md` to reflect the versions just reviewed and today's date.
 
 Format:
 

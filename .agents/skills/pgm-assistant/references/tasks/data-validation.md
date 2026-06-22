@@ -28,7 +28,7 @@ Structural/concrete violations should come from PGM validator APIs in stages 1 a
 
 ## Rule Configuration File
 
-Use `.github/skills/power-grid-analysis/references/tasks/validation-rules.yml` as the configurable rule catalog.
+Use `.agents/skills/pgm-assistant/references/tasks/validation-rules.yml` as the configurable rule catalog.
 
 This file contains:
 

@@ -47,7 +47,7 @@ Screen for patterns that may be calculation-feasible but rarely observed in oper
 - Aggregate source vs total load/generation imbalance patterns.
 - State estimation residual patterns suggesting weak measurement quality settings.
 
-Use rule thresholds from `.github/skills/power-grid-analysis/references/tasks/validation-rules.yml`.
+Use rule thresholds from `.agents/skills/pgm-assistant/references/tasks/validation-rules.yml`.
 
 Do not hardcode operational limits in this page; prefer YAML profile values so validation and evaluation remain consistent.
 
