@@ -36,11 +36,12 @@ Converter includes utilities for switch state and winding extraction:
 ## Important Modeling Differences
 Current caveats include:
 - Focus is power-flow conversion path.
-- PV-related features and some elements are unsupported.
+- `gen` elements are converted (input plus symmetric and three-phase output) as of PGM-IO v1.3.90, sharing the conversion path with `sgen`. Other PV-related features remain unsupported.
 - Delta load type unsupported in PGM conversion.
 - Some switch-related attributes are unsupported.
 - External grid/source impedance treatment differs.
 - Transformer and three-winding transformer feature gaps exist for some zero-sequence and phase-shift settings.
+- `trafo.mag0_percent` (zero-sequence magnetizing impedance) is interpreted as a percentage for pandapower >= 3.4.0 as of PGM-IO v1.3.44; keep pandapower versions aligned when converting zero-sequence transformer parameters.
 
 ## Asymmetric Workflows
 Asymmetric examples are supported with converted input and `calculate_power_flow(symmetric=False)`, then conversion back to pandapower result tables.

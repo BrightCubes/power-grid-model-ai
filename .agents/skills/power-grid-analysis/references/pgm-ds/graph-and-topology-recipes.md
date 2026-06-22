@@ -79,7 +79,8 @@ Useful checks:
 
 ## Mutation + Graph Consistency
 Prefer grid methods instead of editing arrays manually:
-- `add_branch`, `delete_branch`, `add_node`, `delete_node`
+- `append` for adding components (replaces the removed `add_node`/`add_branch`)
+- `delete_branch`, `delete_node`
 - `make_active`, `make_inactive`
 
 These keep arrays and graph views consistent together.
