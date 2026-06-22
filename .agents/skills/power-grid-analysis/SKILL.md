@@ -5,6 +5,9 @@ description: "Use when: working on any power-grid-model ecosystem task, includin
 
 # Power Grid Model Ecosystem Operations
 
+## Package Version Status
+Last reviewed: PGM v(unknown) · PGM-DS v(unknown) · PGM-IO v(unknown) — not yet checked
+
 This skill is for operations across the full `power-grid-model` ecosystem. The repositories are tools; the user request defines the task.
 
 Prompt starters are available in `PROMPT_LIBRARY.md`.
