@@ -59,7 +59,7 @@ Focus on outcome realism and anomaly explanation:
 ## Recommended Workflow
 
 1. Run PGM structural validation first.
-2. Run realism checks using `.github/skills/power-grid-analysis/references/tasks/validation-rules.yml`.
+2. Run realism checks using `.agents/skills/pgm-assistant/references/tasks/validation-rules.yml`.
 3. Tag findings as `heuristic` with confidence (`high`, `medium`, `low`).
 4. Report both component-level findings and system-level findings.
 5. Provide likely causes and targeted corrective actions.
@@ -88,7 +88,7 @@ Use this schema in reports:
 
 ## Related References
 
-- `.github/skills/power-grid-analysis/references/tasks/data-validation.md`
-- `.github/skills/power-grid-analysis/references/tasks/result-evaluation-and-explanation.md`
-- `.github/skills/power-grid-analysis/references/tasks/validation-rules.yml`
-- `.github/skills/power-grid-analysis/references/pgm/data-model-components-and-datasets.md`
+- `.agents/skills/pgm-assistant/references/tasks/data-validation.md`
+- `.agents/skills/pgm-assistant/references/tasks/result-evaluation-and-explanation.md`
+- `.agents/skills/pgm-assistant/references/tasks/validation-rules.yml`
+- `.agents/skills/pgm-assistant/references/pgm/data-model-components-and-datasets.md`
