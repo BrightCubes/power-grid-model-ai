@@ -44,7 +44,7 @@ To install the skills into your coding agent run:
 
 ```bash
 # the skills package will ask you which skill you would like to install (pgm-assistant or pgm-issue-analysis)
-npx skills install https://github.com/PowerGridModel/power-grid-model-ai
+npx skills install https://github.com/BrightCubes/power-grid-model-ai
 ```
 
 <br><br><br>
