@@ -15,12 +15,11 @@ concurrency:
   group: pgm-skill-update
   cancel-in-progress: false
 
-permissions:
-  contents: write # needed to push branch
-  pull-requests: write
-
 jobs:
   update-skill:
+    permissions:
+      contents: write # needed to push branch
+      pull-requests: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
