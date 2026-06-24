@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+
+SPDX-License-Identifier: MPL-2.0
+-->
+
 # Power Grid Analysis Prompt Library
 
 Use these prompts to trigger the `pgm-assistant` skill with clear intent.

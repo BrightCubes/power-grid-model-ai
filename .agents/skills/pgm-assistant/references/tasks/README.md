@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+
+SPDX-License-Identifier: MPL-2.0
+-->
+
 # Task Playbooks Index
 
 Use this folder when the user request is task-oriented (for example "build a workflow", "validate this dataset", "explain these outputs").

@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+
+SPDX-License-Identifier: MPL-2.0
+-->
+
 # PGM Batch, Validation, and Serialization
 
 For task-level validation workflow (scope, checkpoints, deliverables), start with `../tasks/data-validation.md`.

@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+
+SPDX-License-Identifier: MPL-2.0
+-->
+
 # PGM-DS Overview and Core Objects
 
 ## Purpose of PGM-DS

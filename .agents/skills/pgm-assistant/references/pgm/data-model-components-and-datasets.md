@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+
+SPDX-License-Identifier: MPL-2.0
+-->
+
 # PGM Data Model, Components, and Dataset Types
 
 This reference summarizes the most important information from the PGM user manual for understanding what the data actually means in practice.

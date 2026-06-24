@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 repos:
   - repo: https://codeberg.org/fsfe/reuse-tool
     rev: v6.2.0

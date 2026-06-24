@@ -1,4 +1,8 @@
 ---
+# SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 name: pgm-skill-update
 description: "Use when: the user explicitly requests to update the pgm-assistant skill references with the latest changes from the power-grid-model package, check for deprecations or new features, or keep the skill in sync with recent releases. This skill is used only when explicitly called."
 metadata:

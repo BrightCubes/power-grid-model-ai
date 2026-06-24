@@ -1,4 +1,8 @@
 ---
+# SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+#
+# SPDX-License-Identifier: MPL-2.0
+
 name: pgm-issue-analysis
 description: "Use when: a user reports an error, unexpected result, or suspicious behaviour when working with power-grid-model (PGM). Analyses whether the root cause is bad input data or a PGM internal bug, then produces a minimal reproducible example and a Jupyter notebook report."
 ---
