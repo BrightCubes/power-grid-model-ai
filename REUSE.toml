@@ -1,0 +1,18 @@
+version = 1
+SPDX-PackageName = "power-grid-model-ai"
+SPDX-PackageSupplier = "Power Grid Model AI project <info@brightcubes.nl>"
+SPDX-PackageDownloadLocation = "https://github.com/BrightCubes/power-grid-model"
+
+[[annotations]]
+path = "./**"
+precedence = "aggregate"
+SPDX-FileCopyrightText = "Contributors to the Power Grid Model AI project <info@brightcubes.nl>"
+SPDX-License-Identifier = "MPL-2.0"
+
+
+[[annotations]]
+path = "./CODEOWNERS"
+precedence = "override"
+SPDX-FileCopyrightText = "Contributors to the Power Grid Model project <powergridmodel@lfenergy.org>"
+SPDX-License-Identifier = "MPL-2.0"
+
