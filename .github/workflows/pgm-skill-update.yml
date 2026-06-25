@@ -1,4 +1,4 @@
-name: Weekly PGM skill update check
+name: PGM skill update
 
 # Runs the pgm-skill-update skill once a week using GitHub Copilot CLI.
 # The skill checks for new power-grid-model ecosystem releases and proposes
