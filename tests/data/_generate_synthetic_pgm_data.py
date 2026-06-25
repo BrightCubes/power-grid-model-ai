@@ -1,10 +1,6 @@
-#!/usr/bin/env python3
-
 # SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
 #
 # SPDX-License-Identifier: MPL-2.0
-
-# pyright: reportMissingTypeStubs=false
 """Generate synthetic PGM datasets and optional visualization for skill testing."""
 
 from __future__ import annotations
