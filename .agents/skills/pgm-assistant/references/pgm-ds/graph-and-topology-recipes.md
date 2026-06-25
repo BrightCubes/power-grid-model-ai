@@ -88,8 +88,6 @@ Graph model methods support:
 - Cycles
 - Component queries under temporary topology changes
 
-> **Three-winding transformers** are represented internally as a cycle of three nodes. Since PGM-DS v1.10.1, `get_shortest_path` and `get_all_paths` correctly handle these cycles and no longer return spurious paths through transformer internals.
-
 Useful checks:
 - `has_parallel_edges()`
 - `find_fundamental_cycles()`
