@@ -30,6 +30,21 @@ with grid.graphs.active_graph.tmp_remove_nodes([1, 2, 3]):
     components = grid.graphs.active_graph.get_components()
 ```
 
+### Temporarily remove branches for what-if analysis
+```python
+with grid.graphs.active_graph.tmp_remove_branches([branch_id_1, branch_id_2]):
+    components = grid.graphs.active_graph.get_components()
+```
+If an exception occurs inside the block the graph is automatically restored to its original state. Added in PGM-DS v1.10.1.
+
+### Adjacent nodes
+```python
+neighbors = grid.graphs.active_graph.adjacent(node_id=56)
+# Exclude specific node IDs from the result
+neighbors = grid.graphs.active_graph.adjacent(node_id=56, excluding=[1, 2])
+```
+Returns node IDs directly connected to the given node. Added in PGM-DS v1.10.1.
+
 ### Neighborhood traversal
 ```python
 connected = grid.graphs.active_graph.get_connected(node_id=56)
@@ -72,6 +87,8 @@ Graph model methods support:
 - Parallel edges
 - Cycles
 - Component queries under temporary topology changes
+
+> **Three-winding transformers** are represented internally as a cycle of three nodes. Since PGM-DS v1.10.1, `get_shortest_path` and `get_all_paths` correctly handle these cycles and no longer return spurious paths through transformer internals.
 
 Useful checks:
 - `has_parallel_edges()`
