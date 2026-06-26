@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+#
+# SPDX-License-Identifier: MPL-2.0
+
+name: CI - REUSE Compliance Check
+
+on:
+  # run this workflow on every pull request
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  reuse-compliance-check:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: REUSE Compliance Check
+        uses: fsfe/reuse-action@676e2d560c9a403aa252096d99fcab3e1132b0f5 # v6.0.0
