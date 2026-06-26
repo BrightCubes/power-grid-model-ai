@@ -1,0 +1,26 @@
+
+Running case: bad minimal case
+Traceback (most recent call last):
+  File "/home/runner/work/power-grid-model-ai/power-grid-model-ai/tmp/issue-49/step4_minimal.py", line 85, in <module>
+    main()
+  File "/home/runner/work/power-grid-model-ai/power-grid-model-ai/tmp/issue-49/step4_minimal.py", line 81, in main
+    run_case(bad_case, "bad minimal case")
+  File "/home/runner/work/power-grid-model-ai/power-grid-model-ai/tmp/issue-49/step4_minimal.py", line 74, in run_case
+    model.calculate_power_flow(symmetric=False)
+  File "/home/runner/.local/lib/python3.12/site-packages/power_grid_model/_core/power_grid_model.py", line 657, in calculate_power_flow
+    return self._calculate_power_flow(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/.local/lib/python3.12/site-packages/power_grid_model/_core/power_grid_model.py", line 393, in _calculate_power_flow
+    return self._calculate_impl(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/.local/lib/python3.12/site-packages/power_grid_model/_core/power_grid_model.py", line 359, in _calculate_impl
+    self._handle_errors(
+  File "/home/runner/.local/lib/python3.12/site-packages/power_grid_model/_core/power_grid_model.py", line 292, in _handle_errors
+    self._batch_error = handle_errors(
+                        ^^^^^^^^^^^^^^
+  File "/home/runner/.local/lib/python3.12/site-packages/power_grid_model/_core/error_handling.py", line 221, in handle_errors
+    raise error
+power_grid_model._core.errors.IterationDiverge: Iteration failed to converge after 20 iterations! Max deviation: 45.17481145870039, error tolerance: 1e-08.
+
+Try validate_input_data() or validate_batch_data() to validate your data.
+

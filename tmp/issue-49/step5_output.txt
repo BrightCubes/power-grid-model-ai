@@ -1,0 +1,8 @@
+
+Case: original data
+  Result: IterationDiverge
+  Message: Iteration failed to converge after 20 iterations! Max deviation: 57.73382880468666, error tolerance: 1e-08.
+
+Case: source u_ref and tap_pos corrected
+  Result: IterationDiverge
+  Message: Iteration failed to converge after 20 iterations! Max deviation: 2362206.691135538, error tolerance: 1e-08.

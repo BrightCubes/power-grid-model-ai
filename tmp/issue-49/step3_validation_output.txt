@@ -1,0 +1,62 @@
+=== 3a. Built-in structural validation ===
+  No structural validation errors.
+
+=== 3b. Cross-component consistency checks ===
+  MISMATCH: transformer 8591 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8591 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8591 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8592 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8592 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8592 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8593 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8593 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8593 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8594 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8594 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8594 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8595 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8595 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8595 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8596 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8596 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8596 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8597 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8597 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8597 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8598 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8598 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8598 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8599 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8599 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8599 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8600 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8600 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8600 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8601 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8601 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8601 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8602 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8602 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8602 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8603 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8603 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8603 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8604 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8604 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8604 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8605 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8605 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8605 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8606 u1=10750.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8606 u2=400.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8606 tap_pos=-128 outside [1, 5]
+  MISMATCH: transformer 8607 u1=150000.0 vs from_node u_rated=230.0
+  MISMATCH: transformer 8607 u2=11000.0 vs to_node u_rated=230.0
+  SUSPECT: transformer 8607 tap_pos=-128 outside [-13, 9]
+  SUSPECT: source 10555 u_ref=150000.0 far from 1.0 pu; effective voltage = 34500000 V
+
+=== 3c. Physical plausibility checks ===
+  Voltage levels: [230.]
+
+=== 3d. Topology checks ===
+  Topology: all nodes reachable from source(s).
