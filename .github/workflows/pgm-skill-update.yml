@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: Contributors to the Power Grid Model AI project <info@brightcubes.nl>
+#
+# SPDX-License-Identifier: MPL-2.0
 name: PGM skill update
 
 # Runs the pgm-skill-update skill once a week using GitHub Copilot CLI.
