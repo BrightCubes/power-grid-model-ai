@@ -21,10 +21,14 @@ The following adaptations apply when working from a GitHub issue instead of a lo
 
 - **Input data**: extract data from the issue body, code blocks, and any attached files. If the data is not directly provided, ask the reporter to share it as a file attachment or a minimal inline example before proceeding.
 - **Working directory**: create and run all step scripts in a temporary working directory within the repository (e.g. `tmp/issue-<number>/`). Do not commit these files.
-- **Step 5 output**: after completing the investigation, post a comment on the issue with:
+- **Step 5 output**: after completing the investigation, post a comment on the issue using the `gh` CLI:
+  ```bash
+  gh issue comment <number> --body "<summary>"
+  ```
+  The comment body must include:
   - A one-paragraph summary of the root cause (user data bug or potential PGM bug).
   - The key finding from validation (what was flagged, what passed).
   - The minimal reproducible example as an inline code block.
   - The fix or recommended next step.
-  - Attach or link `report.ipynb` if possible; otherwise include the most important notebook cells inline.
+  - A link to the pull request containing the full `report.ipynb` and step scripts.
 - **Do not close the issue**: leave that to the human maintainer after they have reviewed your findings.
