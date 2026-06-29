@@ -1,7 +1,7 @@
 version = 1
 SPDX-PackageName = "power-grid-model-ai"
 SPDX-PackageSupplier = "Power Grid Model AI project <info@brightcubes.nl>"
-SPDX-PackageDownloadLocation = "https://github.com/BrightCubes/power-grid-model"
+SPDX-PackageDownloadLocation = "https://github.com/BrightCubes/power-grid-model-ai"
 
 [[annotations]]
 path = "./**"
