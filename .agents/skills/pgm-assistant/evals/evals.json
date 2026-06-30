@@ -174,7 +174,7 @@
         "Source active and reactive power outputs are reported for both methods",
         "A justified method recommendation (e.g. based on network size, convergence behavior, or deviation magnitude) is included in the output markdown"
       ]
-    },https://github.com/BrightCubes/power-grid-model-ai/tree/main
+    },
     {
       "id": 11,
       "eval_enabled": true,
