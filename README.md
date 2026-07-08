@@ -48,7 +48,7 @@ The skill produces a `report.ipynb` Jupyter notebook with its findings. Each inv
 Example prompt how to use the skill:
 
 ```
-“I am encountering an error when using PGM. Here is the stack-trace and dataset. Can you do an investigation to the root cause.”
+“I am encountering an error when using PGM. Here is the stack trace and dataset. Can you do an investigation to the root cause.”
 ```
 
 ## Installation
