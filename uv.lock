@@ -323,7 +323,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "matplotlib", specifier = ">=3.11.0" },
-    { name = "power-grid-model", specifier = ">=1.13.106" },
+    { name = "power-grid-model", specifier = ">=1.13.110" },
     { name = "power-grid-model-ds", specifier = ">=1.10.2" },
     { name = "power-grid-model-io", specifier = ">=1.3.100" },
 ]

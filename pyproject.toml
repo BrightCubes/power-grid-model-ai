@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "matplotlib>=3.11.0",
-    "power-grid-model>=1.13.106",
+    "power-grid-model>=1.13.110",
     "power-grid-model-io>=1.3.100",
     "power-grid-model-ds>=1.10.2",
 ]
