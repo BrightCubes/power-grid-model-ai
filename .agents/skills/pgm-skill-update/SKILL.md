@@ -23,38 +23,26 @@ Fetch the releases pages for all three repositories in parallel:
 
 For all three repositories, include all releases newer than the versions recorded in Step 0.
 
-For **every qualifying release across all three repositories**, extract:
+For each release, record only:
 
-1. The **highlights** section of the changelog — the bulleted summary of the most important changes.
-2. The **full changelog** — the complete release notes including all PR references with their labels or category headings.
+- The release version/tag and its changelog text (the release notes body as shown on the releases page)
+- For each PR mentioned in that changelog, its title and GitHub label(s)
 
-For each PR referenced in any release, inspect its label or the category heading it appears under in the release notes to decide whether to fetch it:
-
-- **Fetch** PRs with labels such as: `feature`, `bug`, `bugfix`, `enhancement`, or any other user-facing change indicator.
-- **Skip** PRs with labels such as: `dependencies`, `github actions`, `ci`, `chore`, `refactor`, `improvement`, `documentation`, or any other maintenance or tooling indicator.
-
-(These are example label names; match on intent, not exact strings.)
-
-For each **included** PR, fetch the full PR page (description and all comments) and record the content grouped by PR.
+Do not fetch individual PR pages in this step — labels and titles are visible from the releases page itself (or a lightweight PR list call). Full PR content is only fetched later, in Step 5, for changes that survive filtering.
 
 ## Step 2: Filter and Present Releases
 
-For **all packages**, discard releases that are **only** one or more of the following:
+Using only the titles and labels gathered in Step 1 (no additional fetching), filter each release's PRs:
 
-- CI/CD or GitHub Actions dependency updates
-- Lock file or linter dependency bumps
-- Pure documentation formatting or terminology fixes with no API impact
+- **Keep** PRs with labels such as: `feature`, `bug`, `bugfix`, `enhancement`, or any other user-facing change indicator.
+- **Skip** PRs with labels such as: `dependencies`, `github actions`, `ci`, `chore`, `refactor`, `improvement`, `documentation`, or any other maintenance or tooling indicator.
+- If a PR has no label, judge by title/intent instead of discarding by default.
 
-Present the filtered releases to the user in three separate sections before continuing. For each package, list every included release with its full changelog and a linked PR reference for each entry:
+(These are example label names; match on intent, not exact strings.)
 
-**PGM**
-- `vX.Y.Z` (YYYY-MM-DD)
-  - Full changelog text, with each PR rendered as a markdown link: `[#123](https://github.com/PowerGridModel/power-grid-model/pull/123) — one-line summary`
+A release is discarded only if **every** PR in it is filtered out. A release with at least one qualifying PR is kept, but only its qualifying PRs are listed.
 
-**PGM-DS** — same format
-
-**PGM-IO** — same format
-
+Present the filtered releases to the user in three separate sections before continuing. For each package, list every included release with its qualifying PR titles and a linked PR reference for each entry.
 If a package has no qualifying releases, state that clearly in its section.
 
 ## Step 3: Read Skill Reference Files
@@ -91,14 +79,14 @@ If nothing passes for a package, state that clearly for that section and move on
 
 ## Step 5: Analyse Full PR Content for Each Relevant Change
 
-Using the full PR descriptions and comments already collected in Step 1, extract for each relevant PR:
+For each change that passed Step 4, fetch the pull request page in full. Extract:
 
 - **Motivation**: why the change was made
 - **Exact API impact**: what is added, changed, or removed
 - **Constraints or known issues**: anything incomplete, pending, or with caveats
 - **Stability**: fully validated and documented upstream, or partial/in-progress?
 
-Discard changes where the PR content reveals the feature is incomplete, not yet validated, or purely internal.
+Discard changes where the PR reveals the feature is incomplete, not yet validated, or purely internal.
 
 ## Step 6: Formulate Concrete Suggestions
 
@@ -111,7 +99,6 @@ Grouped by package (**PGM**, **PGM-DS**, **PGM-IO**), produce a specific edit pr
 
 Do **not** suggest:
 
-- Deprecation notices that will need to be removed later
 - Features that upstream docs or validators still reject
 - Anything already accurately covered by the current reference text
 
