@@ -13,47 +13,24 @@ This skill reviews recent releases across the `power-grid-model` ecosystem and d
 
 Read `.agents/skills/pgm-assistant/SKILL.md` and locate the **Package Version Status** section near the top. Report the currently recorded versions and last-checked date to the user — this is the baseline for deciding which releases to look at.
 
-## Step 1: Clarify Scope
+## Step 1: Fetch All Releases
 
-If the user has not specified a scope, ask:
+Fetch the releases pages for all three repositories in parallel:
 
-> "Which packages should I check, and over what range?
->
-> - **PGM (main)**: what is the target minor/major version to check up to? (default: latest)
-> - **PGM-DS and PGM-IO**: what time window? (default: last 2 weeks)"
+- **PGM**: `https://github.com/PowerGridModel/power-grid-model/releases`
+- **PGM-DS**: `https://github.com/PowerGridModel/power-grid-model-ds/releases`
+- **PGM-IO**: `https://github.com/PowerGridModel/power-grid-model-io/releases`
 
-Wait for the answer before proceeding.
+For all three repositories, include all releases newer than the versions recorded in Step 0.
 
-## Step 2: Fetch PGM Releases (Minor/Major Only)
+For **every qualifying release across all three repositories**, extract:
 
-Fetch the releases page:
+1. The **highlights** section of the changelog — the bulleted summary of the most important changes.
+2. The **full changelog** — the complete release notes including all PR references, smaller changes, and dependency updates.
 
-- URL: `https://github.com/PowerGridModel/power-grid-model/releases`
+For each PR referenced in any release, fetch the full PR page (description and comments) and record all content grouped by PR.
 
-Include **only minor or major version releases** (e.g. `1.14.0`, `2.0.0`) that are newer than the version recorded in Step 0. Skip all patch releases (e.g. `1.13.1`, `1.13.2`).
-
-For each qualifying release, extract two things:
-
-1. The **highlights** section of the changelog — the bulleted summary of the most important changes. This is the primary focus.
-2. The **full changelog** — the remainder of the release notes covering smaller changes not mentioned in the highlights.
-
-## Step 3: Fetch PGM-DS Releases
-
-Fetch the releases page:
-
-- URL: `https://github.com/PowerGridModel/power-grid-model-ds/releases`
-
-Include **all releases** within the agreed time window. Extract: version tag, release date, and one-line summary for each.
-
-## Step 4: Fetch PGM-IO Releases
-
-Fetch the releases page:
-
-- URL: `https://github.com/PowerGridModel/power-grid-model-io/releases`
-
-Include **all releases** within the agreed time window. Extract: version tag, release date, and one-line summary for each.
-
-## Step 5: Filter and Present Releases
+## Step 2: Filter and Present Releases
 
 For **all packages**, discard releases that are **only** one or more of the following:
 
@@ -69,7 +46,7 @@ Present the filtered releases to the user in three separate sections before cont
 
 If a package has no qualifying releases, state that clearly in its section.
 
-## Step 6: Read Skill Reference Files
+## Step 3: Read Skill Reference Files
 
 Read all reference files across all three layers before moving to the next step. This gives the full picture of what is already documented.
 
@@ -79,11 +56,9 @@ Read all reference files across all three layers before moving to the next step.
 
 **PGM-IO** (`.agents/skills/pgm-assistant/references/pgm-io/`)
 
-## Step 7: Cross-Reference Against References
+## Step 4: Cross-Reference Against References
 
-For each release in the filtered list, decide whether it could affect any of the reference files read in Step 6. Start by matching each release to its corresponding reference layer (PGM → pgm refs, PGM-DS → pgm-ds refs, PGM-IO → pgm-io refs), but also flag cross-layer impacts where relevant.
-
-For PGM releases, evaluate highlights first; then check the full changelog for smaller changes that may still affect a reference.
+For each release in the filtered list, decide whether it could affect any of the reference files read in Step 3. Start by matching each release to its corresponding reference layer (PGM → pgm refs, PGM-DS → pgm-ds refs, PGM-IO → pgm-io refs), but also flag cross-layer impacts where relevant.
 
 **Criteria for "potentially relevant":**
 
@@ -103,18 +78,18 @@ For PGM releases, evaluate highlights first; then check the full changelog for s
 
 If nothing passes for a package, state that clearly for that section and move on.
 
-## Step 8: Fetch Full PR for Each Relevant Change
+## Step 5: Analyse Full PR Content for Each Relevant Change
 
-For each change that passed Step 7, fetch the pull request page in full. Extract:
+Using the full PR descriptions and comments already collected in Step 1, extract for each relevant PR:
 
 - **Motivation**: why the change was made
 - **Exact API impact**: what is added, changed, or removed
 - **Constraints or known issues**: anything incomplete, pending, or with caveats
 - **Stability**: fully validated and documented upstream, or partial/in-progress?
 
-Discard changes where the PR reveals the feature is incomplete, not yet validated, or purely internal.
+Discard changes where the PR content reveals the feature is incomplete, not yet validated, or purely internal.
 
-## Step 9: Formulate Concrete Suggestions
+## Step 6: Formulate Concrete Suggestions
 
 Grouped by package (**PGM**, **PGM-DS**, **PGM-IO**), produce a specific edit proposal for each surviving change:
 
@@ -129,7 +104,7 @@ Do **not** suggest:
 - Features that upstream docs or validators still reject
 - Anything already accurately covered by the current reference text
 
-## Step 10: Present to User for Approval
+## Step 7: Present to User for Approval
 
 Present each suggestion grouped by package. For each one state:
 
@@ -138,7 +113,7 @@ Present each suggestion grouped by package. For each one state:
 
 Wait for explicit approval before making any edits. "No change needed" is a valid and complete outcome.
 
-## Step 11: Update Version Status
+## Step 8: Update Version Status
 
 After all approved edits are applied (or if no edits were needed), update the **Package Version Status** section in `.agents/skills/pgm-assistant/SKILL.md` to reflect the versions just reviewed and today's date.
 
