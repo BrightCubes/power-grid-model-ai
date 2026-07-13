@@ -93,10 +93,6 @@ print(message)
 - `msgpack_deserialize_from_file(path)`
 - `msgpack_serialize_to_file(path, data, dataset_type=...)`
 
-### Deserialization Limits
-
-- JSON/msgpack deserializers reject input nested deeper than 10 levels (nested lists/objects), raising a serialization error (`"Json depth exceeds the limit of 10!"`). If this is hit on legitimate data, flatten/restructure the payload rather than relying on deep nesting.
-
 ## Dataset Utilities
 
 - `get_dataset_type(data)`
