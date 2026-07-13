@@ -26,9 +26,16 @@ For all three repositories, include all releases newer than the versions recorde
 For **every qualifying release across all three repositories**, extract:
 
 1. The **highlights** section of the changelog — the bulleted summary of the most important changes.
-2. The **full changelog** — the complete release notes including all PR references, smaller changes, and dependency updates.
+2. The **full changelog** — the complete release notes including all PR references with their labels or category headings.
 
-For each PR referenced in any release, fetch the full PR page (description and comments) and record all content grouped by PR.
+For each PR referenced in any release, inspect its label or the category heading it appears under in the release notes to decide whether to fetch it:
+
+- **Fetch** PRs with labels such as: `feature`, `bug`, `bugfix`, `enhancement`, or any other user-facing change indicator.
+- **Skip** PRs with labels such as: `dependencies`, `github actions`, `ci`, `chore`, `refactor`, `improvement`, `documentation`, or any other maintenance or tooling indicator.
+
+(These are example label names; match on intent, not exact strings.)
+
+For each **included** PR, fetch the full PR page (description and all comments) and record the content grouped by PR.
 
 ## Step 2: Filter and Present Releases
 
@@ -38,11 +45,15 @@ For **all packages**, discard releases that are **only** one or more of the foll
 - Lock file or linter dependency bumps
 - Pure documentation formatting or terminology fixes with no API impact
 
-Present the filtered releases to the user in three separate sections before continuing:
+Present the filtered releases to the user in three separate sections before continuing. For each package, list every included release with its full changelog and a linked PR reference for each entry:
 
-**PGM** — version · date · one-line summary
-**PGM-DS** — version · date · one-line summary
-**PGM-IO** — version · date · one-line summary
+**PGM**
+- `vX.Y.Z` (YYYY-MM-DD)
+  - Full changelog text, with each PR rendered as a markdown link: `[#123](https://github.com/PowerGridModel/power-grid-model/pull/123) — one-line summary`
+
+**PGM-DS** — same format
+
+**PGM-IO** — same format
 
 If a package has no qualifying releases, state that clearly in its section.
 
