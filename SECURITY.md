@@ -4,7 +4,7 @@
 
 This repository ships **agent skills**: markdown instruction files for AI coding agents working with the [power-grid-model](https://github.com/PowerGridModel/power-grid-model) ecosystem. It contains no runtime code of its own — the agent that executes these skills is your own, running with your permissions on your machine. The security considerations below follow from that trust model.
 
-Security issues in the underlying libraries (`power-grid-model`, `power-grid-model-ds`, `power-grid-model-io`) are covered by the [Power Grid Model security policy](https://github.com/PowerGridModel/power-grid-model?tab=security-ov-file).
+Security issues in the underlying libraries (`power-grid-model`, `power-grid-model-ds`, `power-grid-model-io`) are covered by the [Power Grid Model security policy](https://github.com/PowerGridModel/.github/blob/main/SECURITY.md).
 
 ## Reporting a vulnerability
 
