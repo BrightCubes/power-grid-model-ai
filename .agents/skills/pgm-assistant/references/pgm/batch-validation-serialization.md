@@ -16,6 +16,7 @@ PGM accepts update batch data in multiple forms.
 - Use a dict with keys `indptr` and `data`.
 - `indptr` length is `n_scenarios + 1`.
 - Scenario `k` uses slice `data[indptr[k]:indptr[k + 1]]`.
+- `indptr` must start with `0`, end with the total element count, and be non-decreasing; otherwise a `DatasetError` is raised (hardened in PGM v1.13.115).
 
 ### Cartesian product batch
 
