@@ -13,4 +13,5 @@ dependencies = [
     "power-grid-model>=1.13.111",
     "power-grid-model-io>=1.3.102",
     "power-grid-model-ds>=1.10.2",
+    "pre-commit>=4.6.1",
 ]
