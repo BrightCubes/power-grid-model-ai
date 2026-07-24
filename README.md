@@ -24,6 +24,14 @@ Defined in [.agents/skills/pgm-assistant/SKILL.md](.agents/skills/pgm-assistant/
 
 Reference documentation for the skill lives in [.agents/skills/pgm-assistant/references/](.agents/skills/pgm-assistant/references/).
 
+Example prompt to ask the AI with this skill:
+
+```
+“Calculate short circuit faults on the network. Find the riskiest nodes and which branches would be affected. Use the PGM-assistant skill."
+```
+
+See [PROMPT_LIBRARY.md](.agents/skills/pgm-assistant/PROMPT_LIBRARY.md) for a list of other example prompts.
+
 ### pgm-issue-analysis
 
 A **dedicated issue-debugging** skill for investigating errors and unexpected results in PGM. Defined in [.agents/skills/pgm-issues/SKILL.md](.agents/skills/pgm-issues/SKILL.md). You can use the skill to an initial investigation into an issue or error you get when working with PGM. This skill is especially usefull when encountering a **SparseMatrixError** or **IterationDiverge Error**. The skill create a **Minimal Reproducible Case** which helps in understanding what the root cause of the problem is.
@@ -36,6 +44,12 @@ It follows a structured five-step investigation workflow:
 5. **Diagnose** — classify the root cause as a user data bug or a potential PGM bug
 
 The skill produces a `report.ipynb` Jupyter notebook with its findings. Each investigation step is also saved as a numbered Python script (`step1_reproduce.py`, etc.) for full traceability.
+
+Example prompt how to use the skill:
+
+```
+“I am encountering an error when using PGM. Here is the stack trace and dataset. Can you do an investigation to the root cause.”
+```
 
 ## Installation
 

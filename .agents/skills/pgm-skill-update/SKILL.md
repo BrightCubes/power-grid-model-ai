@@ -17,63 +17,39 @@ This skill reviews recent releases across the `power-grid-model` ecosystem and d
 
 Read `.agents/skills/pgm-assistant/SKILL.md` and locate the **Package Version Status** section near the top. Report the currently recorded versions and last-checked date to the user — this is the baseline for deciding which releases to look at.
 
-## Step 1: Clarify Scope
+## Step 1: Fetch All Releases
 
-If the user has not specified a scope, ask:
+Fetch the releases pages for all three repositories in parallel:
 
-> "Which packages should I check, and over what range?
->
-> - **PGM (main)**: what is the target minor/major version to check up to? (default: latest)
-> - **PGM-DS and PGM-IO**: what time window? (default: last 2 weeks)"
+- **PGM**: `https://github.com/PowerGridModel/power-grid-model/releases`
+- **PGM-DS**: `https://github.com/PowerGridModel/power-grid-model-ds/releases`
+- **PGM-IO**: `https://github.com/PowerGridModel/power-grid-model-io/releases`
 
-Wait for the answer before proceeding.
+For all three repositories, include all releases newer than the versions recorded in Step 0.
 
-## Step 2: Fetch PGM Releases (Minor/Major Only)
+For each release, record only:
 
-Fetch the releases page:
+- The release version/tag and its changelog text (the release notes body as shown on the releases page)
+- For each PR mentioned in that changelog, its title and GitHub label(s)
 
-- URL: `https://github.com/PowerGridModel/power-grid-model/releases`
+Do not fetch individual PR pages in this step — labels and titles are visible from the releases page itself (or a lightweight PR list call). Full PR content is only fetched later, in Step 5, for changes that survive filtering.
 
-Include **only minor or major version releases** (e.g. `1.14.0`, `2.0.0`) that are newer than the version recorded in Step 0. Skip all patch releases (e.g. `1.13.1`, `1.13.2`).
+## Step 2: Filter and Present Releases
 
-For each qualifying release, extract two things:
+Using only the titles and labels gathered in Step 1 (no additional fetching), filter each release's PRs:
 
-1. The **highlights** section of the changelog — the bulleted summary of the most important changes. This is the primary focus.
-2. The **full changelog** — the remainder of the release notes covering smaller changes not mentioned in the highlights.
+- **Keep** PRs with labels such as: `feature`, `bug`, `bugfix`, `enhancement`, or any other user-facing change indicator.
+- **Skip** PRs with labels such as: `dependencies`, `github actions`, `ci`, `chore`, `refactor`, `improvement`, `documentation`, or any other maintenance or tooling indicator.
+- If a PR has no label, judge by title/intent instead of discarding by default.
 
-## Step 3: Fetch PGM-DS Releases
+(These are example label names; match on intent, not exact strings.)
 
-Fetch the releases page:
+A release is discarded only if **every** PR in it is filtered out. A release with at least one qualifying PR is kept, but only its qualifying PRs are listed.
 
-- URL: `https://github.com/PowerGridModel/power-grid-model-ds/releases`
-
-Include **all releases** within the agreed time window. Extract: version tag, release date, and one-line summary for each.
-
-## Step 4: Fetch PGM-IO Releases
-
-Fetch the releases page:
-
-- URL: `https://github.com/PowerGridModel/power-grid-model-io/releases`
-
-Include **all releases** within the agreed time window. Extract: version tag, release date, and one-line summary for each.
-
-## Step 5: Filter and Present Releases
-
-For **all packages**, discard releases that are **only** one or more of the following:
-
-- CI/CD or GitHub Actions dependency updates
-- Lock file or linter dependency bumps
-- Pure documentation formatting or terminology fixes with no API impact
-
-Present the filtered releases to the user in three separate sections before continuing:
-
-**PGM** — version · date · one-line summary
-**PGM-DS** — version · date · one-line summary
-**PGM-IO** — version · date · one-line summary
-
+Present the filtered releases to the user in three separate sections before continuing. For each package, list every included release with its qualifying PR titles and a linked PR reference for each entry.
 If a package has no qualifying releases, state that clearly in its section.
 
-## Step 6: Read Skill Reference Files
+## Step 3: Read Skill Reference Files
 
 Read all reference files across all three layers before moving to the next step. This gives the full picture of what is already documented.
 
@@ -83,11 +59,9 @@ Read all reference files across all three layers before moving to the next step.
 
 **PGM-IO** (`.agents/skills/pgm-assistant/references/pgm-io/`)
 
-## Step 7: Cross-Reference Against References
+## Step 4: Cross-Reference Against References
 
-For each release in the filtered list, decide whether it could affect any of the reference files read in Step 6. Start by matching each release to its corresponding reference layer (PGM → pgm refs, PGM-DS → pgm-ds refs, PGM-IO → pgm-io refs), but also flag cross-layer impacts where relevant.
-
-For PGM releases, evaluate highlights first; then check the full changelog for smaller changes that may still affect a reference.
+For each release in the filtered list, decide whether it could affect any of the reference files read in Step 3. Start by matching each release to its corresponding reference layer (PGM → pgm refs, PGM-DS → pgm-ds refs, PGM-IO → pgm-io refs), but also flag cross-layer impacts where relevant.
 
 **Criteria for "potentially relevant":**
 
@@ -107,9 +81,9 @@ For PGM releases, evaluate highlights first; then check the full changelog for s
 
 If nothing passes for a package, state that clearly for that section and move on.
 
-## Step 8: Fetch Full PR for Each Relevant Change
+## Step 5: Analyse Full PR Content for Each Relevant Change
 
-For each change that passed Step 7, fetch the pull request page in full. Extract:
+For each change that passed Step 4, fetch the pull request page in full. Extract:
 
 - **Motivation**: why the change was made
 - **Exact API impact**: what is added, changed, or removed
@@ -118,7 +92,7 @@ For each change that passed Step 7, fetch the pull request page in full. Extract
 
 Discard changes where the PR reveals the feature is incomplete, not yet validated, or purely internal.
 
-## Step 9: Formulate Concrete Suggestions
+## Step 6: Formulate Concrete Suggestions
 
 Grouped by package (**PGM**, **PGM-DS**, **PGM-IO**), produce a specific edit proposal for each surviving change:
 
@@ -129,11 +103,10 @@ Grouped by package (**PGM**, **PGM-DS**, **PGM-IO**), produce a specific edit pr
 
 Do **not** suggest:
 
-- Deprecation notices that will need to be removed later
 - Features that upstream docs or validators still reject
 - Anything already accurately covered by the current reference text
 
-## Step 10: Present to User for Approval
+## Step 7: Present to User for Approval
 
 Present each suggestion grouped by package. For each one state:
 
@@ -142,7 +115,7 @@ Present each suggestion grouped by package. For each one state:
 
 Wait for explicit approval before making any edits. "No change needed" is a valid and complete outcome.
 
-## Step 11: Update Version Status
+## Step 8: Update Version Status
 
 After all approved edits are applied (or if no edits were needed), update the **Package Version Status** section in `.agents/skills/pgm-assistant/SKILL.md` to reflect the versions just reviewed and today's date.
 
