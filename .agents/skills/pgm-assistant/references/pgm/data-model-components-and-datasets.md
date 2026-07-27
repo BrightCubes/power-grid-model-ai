@@ -162,6 +162,7 @@ Common branch inputs:
 
 - `from_node`, `to_node`
 - `from_status`, `to_status`
+- `from_node` and `to_node` (branch3: all three nodes) may be identical; connecting a branch into itself is valid and no longer rejected by the validator (PGM v1.13.118).
 
 Common branch outputs:
 
