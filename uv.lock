@@ -326,7 +326,7 @@ requires-dist = [
     { name = "matplotlib", specifier = ">=3.11.1" },
     { name = "power-grid-model", specifier = ">=1.13.131" },
     { name = "power-grid-model-ds", specifier = ">=1.10.2" },
-    { name = "power-grid-model-io", specifier = ">=1.3.106" },
+    { name = "power-grid-model-io", specifier = ">=1.3.107" },
 ]
 
 [[package]]
@@ -345,7 +345,7 @@ wheels = [
 
 [[package]]
 name = "power-grid-model-io"
-version = "1.3.106"
+version = "1.3.107"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "numpy" },
@@ -357,7 +357,7 @@ dependencies = [
     { name = "structlog" },
     { name = "tqdm" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e2/f9/2f4bb017922aadb9c6d2f6e7d344ca50b4f25f06328270ab5596e6f8ca5f/power_grid_model_io-1.3.106.tar.gz", hash = "sha256:e21af1e8df5013c4ac2125f5b6c314d6e673075c8576bc3cb11a6b6032c21ffd", size = 330910, upload-time = "2026-07-27T08:39:22.979Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/96/15/7e8a046ad4992343ed18e54f48fe8babd46c618df7502e886bbb6c8bbb2c/power_grid_model_io-1.3.107.tar.gz", hash = "sha256:98b8863f9b696d723efcebc2a562a476a8249dc61ee65bf89d022684c0f5fc77", size = 330876, upload-time = "2026-08-03T05:40:09.418Z" }
 
 [[package]]
 name = "pyparsing"
